@@ -8,10 +8,12 @@ from hashtables import (HashTable,
 
 def get_indices_of_item_weights(weights, length, limit):
     ht = HashTable(16)
-
+    print(ht)
     """
     YOUR CODE HERE
     """
+    for i in weights:
+        ht.hash_table_insert(weights[i], weights.index(i) )
 
     return None
 
