@@ -25,8 +25,17 @@ def proof_of_work(last_proof):
     print("Searching for next proof")
     proof = 0
     #  TODO: Your code here
+    last_five_digits = last_proof[5:]
 
-    print("Proof found: " + str(proof) + " in " + str(timer() - start))
+    raw_hash = hashlib.sha256(last_proof)
+    hash_string = raw_hash.hexdigest()
+    return hash_string
+    
+    while valid_proof(last_hash, proof) is False:
+        proof += 1
+
+        print("Proof found: " + str(proof) + " in " + str(timer() - start))
+    # return proof
     return proof
 
 
@@ -40,7 +49,18 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    print(f'Checking if {proof} is valid...')
+    
+    last_five_digits = last_proof[5:]
+    guess = last_hash + str(proof)
+    guess = guess.encode()
+        
+    hash_value = hashlib.sha256(guess).hexdigest()
+    print(hash_value)
+
+        
+    # return True or False
+    return hash_value[:5] == last_five_digits
 
 
 if __name__ == '__main__':
